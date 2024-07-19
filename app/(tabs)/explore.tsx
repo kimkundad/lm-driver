@@ -1,102 +1,139 @@
+import { Image, Text, View, StyleSheet, Platform, ScrollView, TouchableOpacity, TextInput , Dimensions} from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Link, useNavigation, router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const { width } = Dimensions.get('window');
 
 export default function TabTwoScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <SafeAreaProvider style={{ flex: 1, backgroundColor: '#fff' }} >
+      <ScrollView>
+          <View style={styles.listItemCon}>
+                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Link href="/(tabs)" style={{ padding: 10 }}>
+                            <Ionicons name="chevron-back" size={30} color="black" />
+                        </Link>
+                        <View style={styles.textListHead} >
+                            <Text style={{ fontSize: 20, fontFamily: 'Prompt_500Medium' }}>Order Detail</Text>
+                        </View>
+                        <TouchableOpacity
+                            onPress={() => {
+                                // handle onPress
+                                router.push('(setting)/notification');
+                            }}>
+                            <View style={{ width: 50 }}>
+                                
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                <View style={styles.container}>
+
+                  <View style={styles.bodyContainer}>
+
+                  <View style={styles.textListHead}>
+                    <Text style={{ fontSize: 16, fontFamily: 'Prompt_500Medium', }}>รูปถ่ายเมื่อรับของเสร็จ</Text>
+                  </View>
+                  <View style={styles.boxWhite}>
+                    <Image source={require('../../assets/images/Detail/1721201642512.jpg')}
+                    style={styles.image} />
+                  </View>
+
+                  <View style={styles.textListHead}>
+                    <Text style={{ fontSize: 16, fontFamily: 'Prompt_500Medium', }}>Package detail</Text>
+                  </View>
+
+                  <View style={styles.boxWhite}>
+                    <Image source={require('../../assets/images/Detail/1721199429165.jpg')}
+                    style={{ width: 345, height: 120, borderRadius: 35 }} />
+                  </View>
+
+                  <View style={styles.textListHead}>
+                    <Text style={{ fontSize: 16, fontFamily: 'Prompt_500Medium', }}>Shipping address</Text>
+                  </View>
+
+                  <View style={styles.boxWhite}>
+                    <Image source={require('../../assets/images/Detail/1721199439783.jpg')}
+                    style={{ width: 345, height: 160, borderRadius: 35 }} />
+                  </View>
+
+
+                  <View style={styles.textListHead}>
+                    <Text style={{ fontSize: 16, fontFamily: 'Prompt_500Medium', }}>รูปถ่ายเมื่อจบงาน</Text>
+                  </View>
+                  <View style={styles.boxWhite}>
+                    <Image source={require('../../assets/images/Detail/1721201642512.jpg')}
+                    style={styles.image} />
+                  </View>
+
+                  <TouchableOpacity
+                        onPress={() => {
+                        // handle onPress
+                        }}>
+                        <View style={styles.btn}>
+                        <Text style={styles.btnText}>Accept</Text>
+                        </View>
+                    </TouchableOpacity>
+                    
+                  </View>
+                </View>
+      </ScrollView>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
+  listItemCon: {
+    paddingTop: 40,
+    paddingHorizontal: 0,
+    backgroundColor: '#fff',
+    
+},
+textListHead: {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  padding: 10,
+  fontFamily: 'Prompt_400Regular',
+},
+container: {
+  padding: 10,
+  paddingHorizontal: 12,
+  marginTop: 10,
+},
+bodyContainer: {
+  padding: 10,
+  borderRadius: 20,
+  backgroundColor: '#F5F5F5',
+},
+boxWhite: {
+  padding: 10,
+  borderRadius: 20,
+  backgroundColor: '#fff',
+},
+image: {
+  width: 345, // Full width of the screen
+  height: 120,  // Set the height as needed
+  borderRadius: 20
+},
+btn: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 30,
+  paddingVertical: 10,
+  paddingHorizontal: 20,
+  borderWidth: 1,
+  backgroundColor: '#121F43',
+  borderColor: '#121F43',
+  marginTop: 20,
+  marginBottom: 30
+},
+btnText: {
+  fontSize: 18,
+  lineHeight: 26,
+  fontWeight: '600',
+  color: '#fff',
+},
 });

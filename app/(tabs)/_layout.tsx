@@ -4,6 +4,10 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -19,16 +23,25 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <Octicons name="home" size={28} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
+          title: 'Detail',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <Feather name="truck" size={28} color={color}/>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialCommunityIcons name="face-man-profile" size={28} color={color} />
           ),
         }}
       />
