@@ -7,7 +7,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -28,20 +28,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Detail',
-          tabBarIcon: ({ color, focused }) => (
-            <Feather name="truck" size={28} color={color}/>
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
           tabBarIcon: ({ color, focused }) => (
-            <MaterialCommunityIcons name="face-man-profile" size={28} color={color} />
+            <FontAwesome name="user-circle-o" size={24} color={color} />
           ),
         }}
       />

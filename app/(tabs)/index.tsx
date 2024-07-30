@@ -1,147 +1,143 @@
-import { Image, Text, View, StyleSheet, Platform, ScrollView, TextInput } from 'react-native';
+import React from 'react';
+import { Image, Text, View, StyleSheet, Platform, FlatList, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { Link, useNavigation, router } from 'expo-router';
+
+const data = [
+  {
+    id: '1',
+    name: 'คุณนก ชาเย็น สาขาพระรามเก้า...',
+    image: require('../../assets/images/box.png'),
+    userId: '43036905112553',
+  },
+  {
+    id: '2',
+    name: 'คุณนก ชาเย็น สาขาพระรามเก้า...',
+    image: require('../../assets/images/box.png'),
+    userId: '43036905112553',
+  },
+  {
+    id: '3',
+    name: 'คุณนก ชาเย็น สาขาพระรามเก้า...',
+    image: require('../../assets/images/box.png'),
+    userId: '43036905112553',
+  },
+  {
+    id: '4',
+    name: 'คุณนก ชาเย็น สาขาพระรามเก้า...',
+    image: require('../../assets/images/box.png'),
+    userId: '43036905112553',
+  },
+  // Add more items as needed
+];
+
+const renderItem = ({ item }) => (
+  <TouchableOpacity
+    onPress={() => {
+      // handle onPress
+      router.push('(order)');
+    }}>
+    <View style={styles.boxlist}>
+      <View style={styles.showflex2}>
+        <Image source={item.image}
+          style={{ width: 50, height: 50, marginRight: 10 }} />
+        <View>
+          <Text style={{ color: '#000', fontSize: 16, fontFamily: 'Prompt_400Regular', }}>{item.name}...</Text>
+          <View style={styles.showflex2}>
+            <Text style={{
+              color: '#999', fontSize: 14, fontFamily: 'Prompt_400Regular', marginTop: -3
+            }}>ID:{item.userId}</Text>
+          </View>
+        </View>
+      </View>
+      <View style={styles.iconright}>
+        <Feather name="chevron-right" size={24} color="#000" />
+      </View>
+    </View>
+  </TouchableOpacity>
+);
 
 export default function HomeScreen() {
   return (
     <SafeAreaProvider style={{ flex: 1, backgroundColor: '#fff' }} >
-      <ScrollView>
-        <View style={styles.header}>
-            <View style={styles.showflex}>
+      <FlatList
+        ListHeaderComponent={
+          <>
+            <View style={styles.header}>
+              <View style={styles.showflex}>
                 <Image
-                    style={styles.userImage}
-                    source={{ uri: 'https://wpnrayong.com/admin/assets/media/avatars/300-12.jpg' }} />
-                    <View>
-                      <Text style={{ color: '#000', fontSize: 16, fontFamily: 'Prompt_400Regular', }}>Mr.Shuvit Funsok,</Text>
-                      <View style={styles.showflex2}>
-                        <Text style={{
-                          color: '#666', fontSize: 15, fontFamily: 'Prompt_500Medium', marginTop:-3
-                        }}>รหัส </Text>
-                        <Text style={{
-                          color: '#999', fontSize: 14, fontFamily: 'Prompt_400Regular', marginTop:-3
-                        }}>430369051</Text>
-                      </View>
+                  style={styles.userImage}
+                  source={{ uri: 'https://wpnrayong.com/admin/assets/media/avatars/300-12.jpg' }} />
+                <View>
+                  <Text style={{ color: '#000', fontSize: 16, fontFamily: 'Prompt_400Regular', }}>Mr.Shuvit Funsok,</Text>
+                  <View style={styles.showflex2}>
+                    <Text style={{
+                      color: '#666', fontSize: 15, fontFamily: 'Prompt_500Medium', marginTop: -3
+                    }}>รหัส </Text>
+                    <Text style={{
+                      color: '#999', fontSize: 14, fontFamily: 'Prompt_400Regular', marginTop: -3
+                    }}>430369051</Text>
+                  </View>
+                </View>
+              </View>
+              <View>
+                <Ionicons name="notifications-circle" size={42} color="black" />
+              </View>
+            </View>
+            <View style={styles.container}>
+
+            <View style={styles.textListHead}>
+                <Text style={{ fontSize: 17, fontFamily: 'Prompt_500Medium', }}>Current Shipping</Text>
+              </View>
+
+              <TouchableOpacity
+    onPress={() => {
+      // handle onPress
+      router.push('(order)/detail');
+    }}>
+                    <View style={styles.section}>
+                        <View style={styles.orderTypeCard}>
+                            <View style={styles.orderTypeInfo}>
+                                <Text style={styles.orderTypeTitle}>ชาเย็น สาขาพระรามเก้า</Text>
+                                <Text style={styles.orderTypePrice}>4303690511</Text>
+                                <View style={styles.orderTypeDurationWrapper}>
+                                    <Text style={styles.orderTypeDuration}>401/97 รามคำแหง 166 เขตมีนบุรี กทม. 10510</Text>
+                                </View>
+                            </View>
+                            <Image
+                                source={ require('../../assets/images/images.png') } // replace with actual image URL
+                                style={styles.orderTypeImage}
+                            />
+                        </View>
                     </View>
+                    </TouchableOpacity>
+
+
+              <View style={styles.textListHead}>
+                <Text style={{ fontSize: 17, fontFamily: 'Prompt_500Medium', }}>Recent Your Shipment</Text>
+                <Text style={{ fontSize: 13, fontFamily: 'Prompt_400Regular', }}>View More</Text>
+              </View>
+              <View style={styles.searchSection}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter Order Number"
+                  underlineColorAndroid="transparent"
+                />
+                <Feather style={styles.searchIcon} name="search" size={24} color="gray" />
+              </View>
+
+             
+
             </View>
-            <View>
-              <Ionicons name="notifications-circle" size={42} color="black" />
-            </View>
-        </View>
-        <View style={styles.container}>
-          <View style={styles.textListHead}>
-              <Text style={{ fontSize: 17, fontFamily: 'Prompt_500Medium', }}>Recent Your Shipment</Text>
-              <Text style={{ fontSize: 13, fontFamily: 'Prompt_400Regular', }}>View More</Text>
-          </View>
-
-            <View style={styles.searchSection}>
-                
-    <TextInput
-        style={styles.input}
-        placeholder="Enter Oreder Number"
-        underlineColorAndroid="transparent"
-    />
-    <Feather style={styles.searchIcon} name="search" size={24} color="gray" />
-</View>
-
-          <View>
-
-
-            <View style={styles.boxlist}>
-                <View style={styles.showflex2}>
-                <Image source={require('../../assets/images/box.png')}
-                    style={{ width: 50, height: 50, marginRight:10 }} />
-                  <View>
-                      <Text style={{ color: '#000', fontSize: 16, fontFamily: 'Prompt_400Regular', }}>คุณนก ชาเย็น สาขาพระรามเก้า...</Text>
-                      <View style={styles.showflex2}>
-                        <Text style={{
-                          color: '#999', fontSize: 14, fontFamily: 'Prompt_400Regular', marginTop:-3
-                        }}>ID:43036905112553</Text>
-                      </View>
-                    </View>
-                </View>
-                <View style={styles.iconright}>
-                  <Feather name="chevron-right" size={24} color="#000" />
-                </View>
-            </View>
-
-            <View style={styles.boxlist}>
-                <View style={styles.showflex2}>
-                <Image source={require('../../assets/images/box.png')}
-                    style={{ width: 50, height: 50, marginRight:10 }} />
-                  <View>
-                      <Text style={{ color: '#000', fontSize: 16, fontFamily: 'Prompt_400Regular', }}>คุณนก ชาเย็น สาขาพระรามเก้า...</Text>
-                      <View style={styles.showflex2}>
-                        <Text style={{
-                          color: '#999', fontSize: 14, fontFamily: 'Prompt_400Regular', marginTop:-3
-                        }}>ID:43036905112553</Text>
-                      </View>
-                    </View>
-                </View>
-                <View style={styles.iconright}>
-                  <Feather name="chevron-right" size={24} color="#000" />
-                </View>
-            </View>
-
-            <View style={styles.boxlist}>
-                <View style={styles.showflex2}>
-                <Image source={require('../../assets/images/box.png')}
-                    style={{ width: 50, height: 50, marginRight:10 }} />
-                  <View>
-                      <Text style={{ color: '#000', fontSize: 16, fontFamily: 'Prompt_400Regular', }}>คุณนก ชาเย็น สาขาพระรามเก้า...</Text>
-                      <View style={styles.showflex2}>
-                        <Text style={{
-                          color: '#999', fontSize: 14, fontFamily: 'Prompt_400Regular', marginTop:-3
-                        }}>ID:43036905112553</Text>
-                      </View>
-                    </View>
-                </View>
-                <View style={styles.iconright}>
-                  <Feather name="chevron-right" size={24} color="#000" />
-                </View>
-            </View>
-
-            <View style={styles.boxlist}>
-                <View style={styles.showflex2}>
-                <Image source={require('../../assets/images/box.png')}
-                    style={{ width: 50, height: 50, marginRight:10 }} />
-                  <View>
-                      <Text style={{ color: '#000', fontSize: 16, fontFamily: 'Prompt_400Regular', }}>คุณนก ชาเย็น สาขาพระรามเก้า...</Text>
-                      <View style={styles.showflex2}>
-                        <Text style={{
-                          color: '#999', fontSize: 14, fontFamily: 'Prompt_400Regular', marginTop:-3
-                        }}>ID:43036905112553</Text>
-                      </View>
-                    </View>
-                </View>
-                <View style={styles.iconright}>
-                  <Feather name="chevron-right" size={24} color="#000" />
-                </View>
-            </View>
-
-            <View style={styles.boxlist}>
-                <View style={styles.showflex2}>
-                <Image source={require('../../assets/images/box.png')}
-                    style={{ width: 50, height: 50, marginRight:10 }} />
-                  <View>
-                      <Text style={{ color: '#000', fontSize: 16, fontFamily: 'Prompt_400Regular', }}>คุณนก ชาเย็น สาขาพระรามเก้า...</Text>
-                      <View style={styles.showflex2}>
-                        <Text style={{
-                          color: '#999', fontSize: 14, fontFamily: 'Prompt_400Regular', marginTop:-3
-                        }}>ID:43036905112553</Text>
-                      </View>
-                    </View>
-                </View>
-                <View style={styles.iconright}>
-                  <Feather name="chevron-right" size={24} color="#000" />
-                </View>
-            </View>
-
-
-          </View>
-        </View>
-      </ScrollView>
+          </>
+        }
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
     </SafeAreaProvider>
   );
 }
@@ -161,20 +157,71 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: '#999',
     borderRadius: 50,
-    paddingHorizontal:12,
+    paddingHorizontal: 12,
     marginBottom: 10
+  },
+  section: {
+    marginTop: 10,
+    marginBottom: 15
 },
-searchIcon: {
+sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+},
+orderTypeDuration: {
+  fontSize: 14,
+  color: '#888',
+},
+orderTypeImage: {
+  width: 100,
+  height: 100,
+  borderRadius: 10,
+},
+packageDetail: {
+  backgroundColor: '#fff',
+  borderRadius: 10,
+  padding: 16,
+},
+orderTypeDurationWrapper: {
+  backgroundColor: '#fff', // Background color for duration
+  borderRadius: 10,
+  paddingHorizontal: 10,
+  paddingVertical: 4,
+  marginTop: 8,
+  width: 230
+},
+orderTypeCard: {
+    backgroundColor: '#FFF1E5', // Background color
+    borderRadius: 10,
+    padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+},
+orderTypeInfo: {
+    flexDirection: 'column',
+},
+orderTypeTitle: {
+    fontSize: 16,
+    fontFamily: 'Prompt_500Medium',
+    color: '#888',
+},
+orderTypePrice: {
+    fontSize: 18,
+    fontWeight: 'bold',
+},
+  searchIcon: {
     padding: 10,
-},
-input: {
+  },
+  input: {
     flex: 1,
     paddingTop: 10,
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 10,
     color: '#424242',
-},
+  },
   TextInput: {
     padding: 7,
     paddingHorizontal: 5,
@@ -241,6 +288,7 @@ input: {
     borderRadius: 10,
     backgroundColor: '#F4F4F4',
     padding: 10,
+    marginHorizontal: 10,
     marginTop: 12,
     display: 'flex',
     flexDirection: 'row',
