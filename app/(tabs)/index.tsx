@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet, Platform, FlatList, TouchableOpacity, TextInput } from 'react-native';
+import { Image, Text, View, StyleSheet, Platform, FlatList, TouchableOpacity, TextInput, ImageBackground } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -60,6 +60,36 @@ const renderItem = ({ item }) => (
   </TouchableOpacity>
 );
 
+const renderHorizontalCard = ({ item }) => (
+  <TouchableOpacity
+    onPress={() => {
+      router.push('(order)/detail');
+    }}>
+    <View style={styles.sectionHorizon}>
+      <ImageBackground
+        source={require('../../assets/images/bg_box.png')}
+        style={styles.background}
+        imageStyle={styles.backgroundImage}
+      >
+        <View style={styles.orderTypeCardx}>
+          <View style={styles.orderTypeInfo}>
+            <Text style={styles.orderTypeTitle}>คุณ Thanawut Karnpian</Text>
+            <Text style={styles.orderTypePrice}>สาขาพระรามเก้า</Text>
+            <View style={styles.orderTypeDurationWrapper}>
+              <Text style={styles.orderTypeDuration}>ID : 4303690511</Text>
+            </View>
+            <TouchableOpacity style={styles.buttonc}>
+              <View style={styles.iconright}>
+                <Feather name="chevron-right" size={24} color="#666" />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ImageBackground>
+    </View>
+  </TouchableOpacity>
+);
+
 export default function HomeScreen() {
   return (
     <SafeAreaProvider style={{ flex: 1, backgroundColor: '#fff' }} >
@@ -89,33 +119,20 @@ export default function HomeScreen() {
             </View>
             <View style={styles.container}>
 
-            <View style={styles.textListHead}>
+              <View style={styles.textListHead}>
                 <Text style={{ fontSize: 17, fontFamily: 'Prompt_500Medium', }}>Current Shipping</Text>
               </View>
 
-              <TouchableOpacity
-    onPress={() => {
-      // handle onPress
-      router.push('(order)/detail');
-    }}>
-                    <View style={styles.section}>
-                        <View style={styles.orderTypeCard}>
-                            <View style={styles.orderTypeInfo}>
-                                <Text style={styles.orderTypeTitle}>ชาเย็น สาขาพระรามเก้า</Text>
-                                <Text style={styles.orderTypePrice}>4303690511</Text>
-                                <View style={styles.orderTypeDurationWrapper}>
-                                    <Text style={styles.orderTypeDuration}>401/97 รามคำแหง 166 เขตมีนบุรี กทม. 10510</Text>
-                                </View>
-                            </View>
-                            <Image
-                                source={ require('../../assets/images/images.png') } // replace with actual image URL
-                                style={styles.orderTypeImage}
-                            />
-                        </View>
-                    </View>
-                    </TouchableOpacity>
+              <FlatList
+                horizontal
+                data={data}
+                renderItem={renderHorizontalCard}
+                keyExtractor={item => item.id}
+                contentContainerStyle={{ paddingHorizontal: 0 }}
+                showsHorizontalScrollIndicator={false}
+              />
 
-
+              <View style={{ height: 10 }}></View>
               <View style={styles.textListHead}>
                 <Text style={{ fontSize: 17, fontFamily: 'Prompt_500Medium', }}>Recent Your Shipment</Text>
                 <Text style={{ fontSize: 13, fontFamily: 'Prompt_400Regular', }}>View More</Text>
@@ -129,7 +146,7 @@ export default function HomeScreen() {
                 <Feather style={styles.searchIcon} name="search" size={24} color="gray" />
               </View>
 
-             
+
 
             </View>
           </>
@@ -148,6 +165,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
   },
+  buttonText: {
+    fontSize: 16,
+    color: '#333',
+    fontFamily: 'Prompt_500Medium',
+  },
   searchSection: {
     marginTop: 15,
     flex: 1,
@@ -160,57 +182,91 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     marginBottom: 10
   },
+  background: {
+    flexDirection: 'row',
+    padding: 16,
+  },
+  backgroundImage: {
+    borderRadius: 8,
+    opacity: 0.9, // Adjust the opacity as needed
+  },
+  sectionHorizon: {
+    margin: 8,
+    borderRadius: 8,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+    width: 280
+  },
   section: {
     marginTop: 10,
     marginBottom: 15
-},
-sectionTitle: {
+  },
+  sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
-},
-orderTypeDuration: {
-  fontSize: 14,
-  color: '#888',
-},
-orderTypeImage: {
-  width: 100,
-  height: 100,
-  borderRadius: 10,
-},
-packageDetail: {
-  backgroundColor: '#fff',
-  borderRadius: 10,
-  padding: 16,
-},
-orderTypeDurationWrapper: {
-  backgroundColor: '#fff', // Background color for duration
-  borderRadius: 10,
-  paddingHorizontal: 10,
-  paddingVertical: 4,
-  marginTop: 8,
-  width: 230
-},
-orderTypeCard: {
+  },
+  orderTypeDuration: {
+    fontSize: 14,
+    color: '#888',
+  },
+  orderTypeImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+  },
+  packageDetail: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 16,
+  },
+  orderTypeDurationWrapper: {
+    backgroundColor: '#fff', // Background color for duration
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    marginTop: 8,
+    width: 140
+  },
+  buttonc: {
+    backgroundColor: '#fff',
+    padding: 8,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    marginTop: 30
+  },
+  orderTypeCard: {
     backgroundColor: '#FFF1E5', // Background color
     borderRadius: 10,
     padding: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-},
-orderTypeInfo: {
+  },
+  orderTypeCardx: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  orderTypeInfo: {
     flexDirection: 'column',
-},
-orderTypeTitle: {
+  },
+  orderTypeTitle: {
     fontSize: 16,
     fontFamily: 'Prompt_500Medium',
     color: '#888',
-},
-orderTypePrice: {
+  },
+  orderTypePrice: {
     fontSize: 18,
-    fontWeight: 'bold',
-},
+    fontFamily: 'Prompt_500Medium',
+  },
   searchIcon: {
     padding: 10,
   },
