@@ -230,6 +230,7 @@ export default function Tracking() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
