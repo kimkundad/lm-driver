@@ -36,6 +36,7 @@ export default function RootLayout() {
         <Stack.Screen name="(alogin)" options={{ headerShown: false }} />
         <Stack.Screen name="(order)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(setting)" options={{ headerShown: false }}/>
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>
