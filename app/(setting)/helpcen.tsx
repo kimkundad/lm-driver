@@ -14,6 +14,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
 
+
 const Helpcen = () => {
     return (
         <SafeAreaProvider style={{ flex: 1, backgroundColor: '#fff' }} >
